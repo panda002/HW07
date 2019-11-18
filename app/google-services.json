@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "148275843971-a8flflnrurd7thf4sgu298968adqmddq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.ownproj.homework07",
-            "certificate_hash": "b4a9ba6fca41ac13cb1524ff52fc147c6a9f590d"
-          }
-        },
-        {
           "client_id": "148275843971-uk205v4r5aeaqe4b3pm6cdrid5neqci1.apps.googleusercontent.com",
           "client_type": 3
         }

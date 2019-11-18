@@ -13,7 +13,8 @@ public class MainActivity
         DisplayHomeFragment.LoginFragmentInterface,
         CreateProfileFragment.OnFragmentInteractionListener,
         DisplayProfileFragment.OnFragmentInteractionListener,
-        CreateTrip.OnFragmentInteractionListener
+        CreateTrip.OnFragmentInteractionListener,
+        SignupFragment.SignupFragmentInterface
         {
 
 
