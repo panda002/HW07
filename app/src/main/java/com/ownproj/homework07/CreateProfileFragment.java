@@ -60,6 +60,7 @@ public class CreateProfileFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         btn_save = getView().findViewById(R.id.bt_save);
+
         et_firstName = getView().findViewById(R.id.et_firstname);
         et_lastname = getView().findViewById(R.id.et_lastname);
         radio_gender = getView().findViewById(R.id.radio_department);
