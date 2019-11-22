@@ -1,15 +1,20 @@
 package com.ownproj.homework07;
 
 
+import java.util.List;
+
 public class Trips {
 
-    String title, friend, owner, coverpic;
+    String title;
+    List<String> friend;
+    String owner;
+    String coverpic;
     int  longitute, latitude;
 
 
-    public Trips(String title, String friend, String owner, String coverpic, int longitute, int latitude) {
+    public Trips(String title, List<String> friend, String owner, String coverpic, int longitute, int latitude) {
         this.title = title;
-        this.friend = friend;
+        this.friend =  friend;
         this.owner = owner;
         this.coverpic = coverpic;
         this.longitute = longitute;
@@ -39,11 +44,11 @@ public class Trips {
         this.title = title;
     }
 
-    public String getFriend() {
+    public List<String> getFriend() {
         return friend;
     }
 
-    public void setFriend(String friend) {
+    public void setFriend(List<String> friend) {
         this.friend = friend;
     }
 

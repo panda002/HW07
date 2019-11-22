@@ -107,7 +107,7 @@ public class CreateProfileFragment extends Fragment {
                     .set(profile)
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){
-                            Log.d("TAG", "DocumentSnapshot written with ID: " + task.getResult());
+                            Log.d("TAG", "Profile document written with ID: " + task.getResult());
                         }
                     }).addOnFailureListener(e -> Log.d("TAG", "DocumentSnapshot written with ID: " +e));
             //addprofile();

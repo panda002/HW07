@@ -22,6 +22,7 @@
         android:inputType="numberSigned|numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/Trip_btn_createchat"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Trip_latitude" />
 
@@ -84,7 +85,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="70dp"
         android:layout_marginEnd="183dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
         android:ems="10"
         android:hint="Enter Latitude"
         android:inputType="numberSigned|numberDecimal"
@@ -105,5 +106,38 @@
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toEndOf="@+id/Trip_iv_tripphoto"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.017" />
+
+    <EditText
+        android:id="@+id/friend_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="178dp"
+        android:layout_marginBottom="88dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:scrollbarStyle="insideInset"
+        app:layout_constraintBottom_toTopOf="@+id/Trip_btn_createchat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Trip_longitude" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="215dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="9dp"
+        android:fontFamily="cursive"
+        android:text="Select Friends"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Trip_iv_tripphoto"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
