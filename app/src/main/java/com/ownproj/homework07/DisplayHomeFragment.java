@@ -14,7 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -24,11 +26,10 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.util.concurrent.Executor;
 
 
 /**
@@ -39,6 +40,7 @@ public class DisplayHomeFragment extends Fragment {
     private FirebaseAuth mAuth;
     Button btn_login;
     Button btn_signup;
+    EditText email, password;
     private LoginFragmentInterface listner;
     ProgressBar progressBar;
     static final int GOOGLE_SIGN = 123;
@@ -80,6 +82,8 @@ public class DisplayHomeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         btn_login = getActivity().findViewById(R.id.btn_login);
         btn_signup = getActivity().findViewById(R.id.btn_signup);
+        email = getActivity().findViewById(R.id.login_email);
+        password = getActivity().findViewById(R.id.login_password);
 
         progressBar = getActivity().findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
@@ -92,73 +96,30 @@ public class DisplayHomeFragment extends Fragment {
 
         mGoogleSignInClient = GoogleSignIn.getClient(getContext(), googleSignInOptions);
 
-        btn_login.setOnClickListener(view -> SigninGoogle());
+        btn_login.setOnClickListener(view -> mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("TAG", "signInWithEmail:success");
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Toast.makeText(getContext(), user.getEmail()+ " logged in Successfully", Toast.LENGTH_SHORT).show();
+                        listner.gotoProfileBuilder();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.d("TAG", "signInWithEmail:failure", task.getException());
+                    }
+                }));
 
         btn_signup.setOnClickListener(view -> listner.goToCreateAccount());
     }
 
 
-
-    void SigninGoogle ()
-    {
-        progressBar.setVisibility(View.VISIBLE);
-        Intent signIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signIntent, GOOGLE_SIGN);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == GOOGLE_SIGN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn
-                    .getSignedInAccountFromIntent(data);
-            try {
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                if (account != null) firebaseAuthWithGoogle(account);
-            } catch (ApiException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
-
-    private void firebaseAuthWithGoogle (GoogleSignInAccount account){
-        Log.d("TAG", "firebaseAuthWithGoogle: " + account.getId());
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener( task -> {
-                    if (task.isSuccessful()) {
-
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Log.d("TAG", "SignIn Successful");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        updateUI(user);
-                    } else {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        Log.d("TAG", "firebaseAuthWithGoogle: " + task.getException());
-                        updateUI(null);
-                    }
-                });
-    }
-
-    private void updateUI (FirebaseUser user){
-        if (user != null) {
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-
-            Log.d("TAG", "name : " + name);
-            Log.d("TAG", "email : " + email);
-            btn_login.setVisibility(View.INVISIBLE);
-            listner.gotoProfileBuilder();
-
-        } else {
-            btn_login.setVisibility(View.VISIBLE);
-
-        }
-
-    }
 
     public interface LoginFragmentInterface {
         void goToCreateAccount();

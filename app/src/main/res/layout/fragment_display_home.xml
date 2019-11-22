@@ -9,16 +9,16 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="114dp"
-        android:layout_height="84dp"
+        android:layout_width="86dp"
+        android:layout_height="44dp"
         android:layout_marginStart="154dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="156dp"
-        android:layout_marginBottom="240dp"
-        android:text="Login With Google"
+        android:layout_marginBottom="32dp"
+        android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -33,13 +33,15 @@
         android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login"
+        app:layout_constraintVertical_bias="0.394" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="324dp"
-        android:layout_height="135dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="136dp"
         android:layout_marginBottom="32dp"
         android:fontFamily="cursive"
@@ -62,4 +64,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <EditText
+        android:id="@+id/login_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="29dp"
+        android:ems="10"
+        android:hint="Enter Email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/login_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/login_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="37dp"
+        android:ems="10"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/btn_login"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_email" />
 </androidx.constraintlayout.widget.ConstraintLayout>

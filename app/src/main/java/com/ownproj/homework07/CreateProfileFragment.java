@@ -2,11 +2,15 @@ package com.ownproj.homework07;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +19,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.IOException;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -30,7 +34,7 @@ import com.google.firebase.firestore.QuerySnapshot;
  */
 public class CreateProfileFragment extends Fragment {
 
-    private Button btn_save;
+    private Button btn_save, btn_logout;
     private EditText et_firstName;
     private EditText et_lastname;
     private RadioGroup radio_gender;
@@ -41,6 +45,7 @@ public class CreateProfileFragment extends Fragment {
     private ImageView profilepic;
     private OnFragmentInteractionListener mListener;
 
+    public static final int PICK_IMAGE = 1;
 
 
     public CreateProfileFragment() {
@@ -65,7 +70,8 @@ public class CreateProfileFragment extends Fragment {
         et_lastname = getView().findViewById(R.id.et_lastname);
         radio_gender = getView().findViewById(R.id.radio_department);
         profilepic = getView().findViewById(R.id.iv_selectprofile);
-
+        btn_logout = getView().findViewById(R.id.btn_logout);
+        profilepic.setOnClickListener(view -> chooseImage());
 
         btn_save.setOnClickListener(view -> {
             fname = et_firstName.getText().toString();
@@ -84,7 +90,7 @@ public class CreateProfileFragment extends Fragment {
             profile.setFname(fname);
             profile.setLname(lname);
             profile.setGender(gender);
-            profile.setImageno(R.drawable.common_google_signin_btn_icon_dark);
+            profile.setImageno(profile.getImageno());
             profile.setPid(pid);
 
             db.collection("Users")
@@ -98,37 +104,49 @@ public class CreateProfileFragment extends Fragment {
             //addprofile();
             mListener.gotoDisplayFragment(profile);
         });
+
+        btn_logout.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            DisplayHomeFragment  displayHomeFragment = new DisplayHomeFragment();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, displayHomeFragment, "tag_DisplayHome")
+                    .addToBackStack(null)
+                    .commit();
+
+            Toast.makeText(getContext(), "LOGOUT Successful", Toast.LENGTH_SHORT).show();
+        });
+
     }
 
-    /*private void addprofile() {
-        fname = et_firstName.getText().toString();
-        lname = et_lastname.getText().toString();
-        if(radio_gender.getCheckedRadioButtonId() == R.id.radioMale)
-        {
-            gender = "Male";
-        }else if(radio_gender.getCheckedRadioButtonId() == R.id.radioFmale)
-        {
-            gender = "Female";
+
+    public void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+            Uri uri = data.getData();
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+                // Log.d(TAG, String.valueOf(bitmap));
+
+                profilepic = getActivity().findViewById(R.id.iv_selectprofile);
+                profilepic.setImageBitmap(bitmap);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-        String pid = fname + lname + gender;
-
-        Profile profile = new Profile();
-        profile.setFname(fname);
-        profile.setLname(lname);
-        profile.setGender(gender);
-        profile.setImageno(R.drawable.common_google_signin_btn_icon_dark);
-        profile.setPid(pid);
-
-        db.collection("Users")
-                .document(profile.getPid())
-                .set(profile)
-                .addOnCompleteListener(task -> {
-                    if(task.isSuccessful()){
-                        Log.d("TAG", "DocumentSnapshot written with ID: " + task.getResult());
-                    }
-                }).addOnFailureListener(e -> Log.w("TAG", "Error adding document", e));
-    }*/
+    }
 
 
     @Override
