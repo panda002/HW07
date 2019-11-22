@@ -19,9 +19,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
@@ -39,12 +41,13 @@ public class CreateProfileFragment extends Fragment {
     private EditText et_lastname;
     private RadioGroup radio_gender;
     private Profile profile;
-    private String fname, lname;
+    private String fname, lname, email;
     private String gender;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ImageView profilepic;
     private OnFragmentInteractionListener mListener;
-
+    private TextView owneremail;
+    private FirebaseAuth mAuth;
     public static final int PICK_IMAGE = 1;
 
 
@@ -72,10 +75,17 @@ public class CreateProfileFragment extends Fragment {
         profilepic = getView().findViewById(R.id.iv_selectprofile);
         btn_logout = getView().findViewById(R.id.btn_logout);
         profilepic.setOnClickListener(view -> chooseImage());
+        owneremail = getView().findViewById(R.id.user_email);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        owneremail.setText(user.getEmail());
 
         btn_save.setOnClickListener(view -> {
             fname = et_firstName.getText().toString();
             lname = et_lastname.getText().toString();
+            email = user.getEmail();
             if(radio_gender.getCheckedRadioButtonId() == R.id.radioMale)
             {
                 gender = "Male";
@@ -84,17 +94,16 @@ public class CreateProfileFragment extends Fragment {
                 gender = "Female";
             }
 
-            String pid = fname + lname + gender;
 
             Profile profile = new Profile();
             profile.setFname(fname);
             profile.setLname(lname);
             profile.setGender(gender);
             profile.setImageno(profile.getImageno());
-            profile.setPid(pid);
+            profile.setEmail(email);
 
             db.collection("Users")
-                    .document(profile.getPid())
+                    .document(user.getEmail())
                     .set(profile)
                     .addOnCompleteListener(task -> {
                         if(task.isSuccessful()){

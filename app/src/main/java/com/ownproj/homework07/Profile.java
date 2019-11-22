@@ -7,14 +7,14 @@ public class Profile {
     String lname;
     String gender;
     int imageno;
-    String pid;
+    String email;
 
-    public Profile(String fname, String lname, String gender, int imageno, String pid) {
+    public Profile(String fname, String lname, String gender, int imageno, String email) {
         this.fname = fname;
         this.lname = lname;
         this.gender = gender;
         this.imageno = imageno;
-        this.pid = pid;
+        this.email = email;
     }
 
     public Profile()
@@ -52,12 +52,12 @@ public class Profile {
         this.imageno = imageno;
     }
 
-    public String getPid() {
-        return pid;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class Profile {
                 ", lname='" + lname + '\'' +
                 ", gender='" + gender + '\'' +
                 ", imageno=" + imageno + '\'' +
-                ", pid=" + pid +
+                ", email=" + email +
                 '}';
         }
 
@@ -77,7 +77,7 @@ public class Profile {
         this.lname = (String) mapProfile.get("lname");
         this.gender = (String) mapProfile.get("gender");
         this.imageno = (int)(long) mapProfile.get("imageno");
-        this.pid = (String) mapProfile.get("pid");
+        this.email = (String) mapProfile.get("email");
     }
 
 
