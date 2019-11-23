@@ -16,14 +16,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class DisplayProfileFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private FirebaseFirestore db;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     Profile profile = new Profile();
     private TextView fullname;
@@ -33,7 +43,10 @@ public class DisplayProfileFragment extends Fragment {
     private Button btn_findTrip;
     private Button btn_findFriends;
     private Button btn_editProfile;
-
+    private FirebaseAuth mAuth;
+    private String email;
+    FirebaseStorage storage;
+    private StorageReference storageReference;
 
     public DisplayProfileFragment() {
         // Required empty public constructor
@@ -75,10 +88,45 @@ public class DisplayProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        fullname = getActivity().findViewById(R.id.tv_fragDisplayName);
+        gender = getActivity().findViewById(R.id.tv_fragDisplayGender);
+        profilepic = getActivity().findViewById(R.id.imageFragDisplayProfile);
         btn_createTrip = getActivity().findViewById(R.id.btn_createtripDPF);
+        btn_editProfile = getActivity().findViewById(R.id.btn_editprofileDPF);
+        btn_findTrip = getActivity().findViewById(R.id.btn_findtripDPF);
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        email = user.getEmail();
+
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+        DocumentReference docRef = db.collection("Users").document(email);
+
+        docRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                Log.d("TAG","task "+task.getResult());
+                if (document.exists()) {
+                    profile.setFname(document.getData().get("fname").toString());
+                    profile.setLname(document.getData().get("lname").toString());
+                    profile.setGender(document.getData().get("gender").toString());
+                    if(document.getData().get("profilepic") != null){
+                        profile.setProfileimage(document.getData().get("profilepic").toString());
+                    }
+                    fullname.setText(profile.getFname()+" "+profile.getLname());
+                    gender.setText(profile.getGender());
+                    Picasso.get().load(profile.getProfileimage()).into(profilepic);
+                } else {
+                    Log.d(TAG, "No such document");
+                }
+            } else {
+                Log.d(TAG, "get failed with ", task.getException());
+            }
+        });
         btn_createTrip.setOnClickListener(view -> mListener.gotoCreatetrip());
+
+        btn_editProfile.setOnClickListener(view -> mListener.gotoProfileBuilder());
     }
 
 
@@ -87,5 +135,7 @@ public class DisplayProfileFragment extends Fragment {
         // TODO: Update argument type and name
         //void onFragmentInteraction(Uri uri);
         void gotoCreatetrip();
+
+        void gotoProfileBuilder();
     }
 }

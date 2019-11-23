@@ -57,7 +57,7 @@ public class CreateProfileFragment extends Fragment {
     private EditText et_firstName;
     private EditText et_lastname;
     private RadioGroup radio_gender;
-    private Profile profile;
+    private Profile profile = new Profile();
     private String fname, lname, email;
     private String gender;
     private RadioButton rb_male;
@@ -95,7 +95,6 @@ public class CreateProfileFragment extends Fragment {
         radio_gender = getView().findViewById(R.id.radio_department);
         profilepic = getView().findViewById(R.id.iv_selectprofile);
         btn_logout = getView().findViewById(R.id.btn_logout);
-        profilepic.setOnClickListener(view -> chooseImage());
         owneremail = getView().findViewById(R.id.user_email);
         rb_male = getView().findViewById(R.id.radioMale);
         rb_female = getView().findViewById(R.id.radioFmale);
@@ -112,6 +111,7 @@ public class CreateProfileFragment extends Fragment {
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
+                Log.d("TAG","task "+task.getResult());
                 if (document.exists()) {
                     profile.setFname(document.getData().get("fname").toString());
                     profile.setLname(document.getData().get("lname").toString());
@@ -137,6 +137,8 @@ public class CreateProfileFragment extends Fragment {
             }
         });
 
+
+        profilepic.setOnClickListener(view -> chooseImage());
 
         btn_save.setOnClickListener(view -> {
             fname = et_firstName.getText().toString();
@@ -199,9 +201,11 @@ public class CreateProfileFragment extends Fragment {
                 && data != null && data.getData() != null )
         {
             filePath = data.getData();
+            Log.d(TAG, "onActivityResult filePath: "+filePath);
             /*try {*/
                 //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 Picasso.get().load(filePath).into(profilepic);
+                profile.setProfileimage(filePath.toString());
             /*}
             catch (IOException e)
             {
