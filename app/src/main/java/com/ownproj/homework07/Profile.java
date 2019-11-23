@@ -6,14 +6,14 @@ public class Profile {
     String fname;
     String lname;
     String gender;
-    int imageno;
+    String profileimage;
     String email;
 
-    public Profile(String fname, String lname, String gender, int imageno, String email) {
+    public Profile(String fname, String lname, String gender, String profileimage, String email) {
         this.fname = fname;
         this.lname = lname;
         this.gender = gender;
-        this.imageno = imageno;
+        this.profileimage = profileimage;
         this.email = email;
     }
 
@@ -44,12 +44,12 @@ public class Profile {
         this.gender = gender;
     }
 
-    public int getImageno() {
-        return imageno;
+    public String getProfileimage() {
+        return profileimage;
     }
 
-    public void setImageno(int imageno) {
-        this.imageno = imageno;
+    public void setProfileimage(String profileimage) {
+        this.profileimage = profileimage;
     }
 
     public String getEmail() {
@@ -66,7 +66,7 @@ public class Profile {
                 "fname='" + fname + '\'' +
                 ", lname='" + lname + '\'' +
                 ", gender='" + gender + '\'' +
-                ", imageno=" + imageno + '\'' +
+                ", profileimage=" + profileimage + '\'' +
                 ", email=" + email +
                 '}';
         }
@@ -76,7 +76,7 @@ public class Profile {
         this.fname = (String) mapProfile.get("fname");
         this.lname = (String) mapProfile.get("lname");
         this.gender = (String) mapProfile.get("gender");
-        this.imageno = (int)(long) mapProfile.get("imageno");
+        this.profileimage = (String) mapProfile.get("profileimage");
         this.email = (String) mapProfile.get("email");
     }
 
