@@ -3,11 +3,8 @@ package com.ownproj.homework07;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -85,12 +79,15 @@ public class SignupFragment extends Fragment {
         btn_signup = getActivity().findViewById(R.id.btnsu_signup);
         btn_cancel = getActivity().findViewById(R.id.btnsu_cancel);
 
-        btn_signup.setOnClickListener(view -> mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass1.getText().toString())
-                .addOnCompleteListener( task -> {
+        btn_signup.setOnClickListener(view -> {
+            if(authentication()){
+                mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass1.getText().toString())
+                .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("TAG", "Signup : Success");
                         FirebaseUser user = mAuth.getCurrentUser();
+                        Toast.makeText(getActivity(), "Signup Successfully", Toast.LENGTH_SHORT).show();
                         listner.gotoProfileBuilder();
                     } else {
                         // If sign in fails, display a message to the user.
@@ -99,10 +96,44 @@ public class SignupFragment extends Fragment {
                     }
 
                     // ...
-                }));
+                });
+            }
 
+    });
+
+        btn_cancel.setOnClickListener(view -> {
+            DisplayHomeFragment  displayHomeFragment = new DisplayHomeFragment();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.container, displayHomeFragment, "tag_DisplayHome")
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 
+
+    private boolean authentication(){
+        if (fname.getText().toString().equals("")
+                || fname.getText().toString().trim().length() <= 0) {
+            fname.setError("Enter the First Name");
+        }else if (lname.getText().toString().equals("")
+                || lname.getText().toString().trim().length() <= 0) {
+            lname.setError("Enter the Last Name");
+        }else if (email.getText().toString().equals("")
+                || email.getText().toString().trim().length() <= 0) {
+            email.setError("Enter an Email");
+        }else if (pass1.getText().toString().equals("")
+                || pass1.getText().toString().trim().length() <= 0) {
+            pass1.setError("Enter a Password");
+        }else if (pass2.getText().toString().equals("")
+                || pass2.getText().toString().trim().length() <= 0) {
+            pass2.setError("Enter the Password again");
+        }else
+        {
+            return true;
+        }
+        return false;
+    }
 
     public interface SignupFragmentInterface {
         void gotoProfileBuilder();

@@ -1,24 +1,28 @@
 package com.ownproj.homework07;
 
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Trips {
 
     String title;
-    List<String> friend;
+    ArrayList<String> friend;
     String owner;
     String coverpic;
-    int  longitute, latitude;
+    String TripId;
+    String  longitude, latitude;
 
 
-    public Trips(String title, List<String> friend, String owner, String coverpic, int longitute, int latitude) {
+    public Trips(String title, ArrayList<String> friend, String owner, String coverpic, String longitude, String latitude, String TripId) {
         this.title = title;
         this.friend =  friend;
         this.owner = owner;
         this.coverpic = coverpic;
-        this.longitute = longitute;
+        this.longitude = longitude;
         this.latitude = latitude;
+        this.TripId = TripId;
     }
 
     public Trips() {
@@ -31,8 +35,9 @@ public class Trips {
                     ", friend ='"+ friend + '\'' +
                     ", owner ='" + owner + '\'' +
                     ", coverpic ='" + coverpic + '\'' +
-                    ", longitute ='"+ longitute + '\'' +
-                    ", latitude ='" +latitude+
+                    ", longitude ='"+ longitude + '\'' +
+                    ", latitude ='" +latitude+ '\'' +
+                    ", TripId ='" +TripId+
         "}";
     }
 
@@ -44,11 +49,11 @@ public class Trips {
         this.title = title;
     }
 
-    public List<String> getFriend() {
+    public ArrayList<String> getFriend() {
         return friend;
     }
 
-    public void setFriend(List<String> friend) {
+    public void setFriend(ArrayList<String> friend) {
         this.friend = friend;
     }
 
@@ -68,19 +73,42 @@ public class Trips {
         this.coverpic = coverpic;
     }
 
-    public int getLongitute() {
-        return longitute;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public void setLongitute(int longitute) {
-        this.longitute = longitute;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
-    public int getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(int latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    public String getTripId() {
+        return TripId;
+    }
+
+    public void setTripId(String TripId) {
+        this.TripId = TripId;
+    }
+
+
+
+    public Map toHashMap(){
+        Map<String, Object> userMap = new HashMap<>();
+
+        userMap.put("coverpic", this.coverpic);
+        userMap.put("latitude", this.latitude);
+        userMap.put("longitude", this.longitude);
+        userMap.put("title", this.title);
+        userMap.put("tripId", this.TripId);
+        userMap.put("friend", this.friend);
+        userMap.put("owner", this.owner);
+        return userMap;
     }
 }

@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/scenery"
     tools:context=".CreateProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,8 +13,9 @@
 
     <EditText
         android:id="@+id/et_lastname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="219dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rounded"
         android:ems="10"
         android:hint="Last Name"
         android:inputType="textPersonName"
@@ -26,19 +28,22 @@
 
     <ImageView
         android:id="@+id/iv_selectprofile"
-        android:layout_width="151dp"
-        android:layout_height="118dp"
+        android:layout_width="244dp"
+        android:layout_height="186dp"
+        android:orientation="horizontal"
         android:src="@drawable/googleg_standard_color_18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.343"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.104" />
+        app:layout_constraintVertical_bias="0.028" />
 
     <EditText
         android:id="@+id/et_firstname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="223dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rounded"
         android:ems="10"
         android:hint="First Name"
         android:inputType="textPersonName"
@@ -57,6 +62,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="318dp"
+        android:background="@android:drawable/checkbox_off_background"
         android:text="Logout"
         app:layout_constraintBottom_toTopOf="@+id/radio_department"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,6 +100,7 @@
             android:layout_marginTop="24dp"
             android:text="Male"
             android:textSize="18sp" />
+
     </RadioGroup>
 
     <Button
@@ -101,24 +108,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@android:drawable/checkbox_off_background"
         android:text="Save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radio_department"
-        app:layout_constraintVertical_bias="0.415" />
+        app:layout_constraintVertical_bias="0.137" />
 
     <TextView
         android:id="@+id/user_email"
         android:layout_width="298dp"
         android:layout_height="51dp"
+        android:background="@drawable/rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.389"
+        app:layout_constraintHorizontal_bias="0.371"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_lastname"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintVertical_bias="0.07" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="81dp"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.442" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

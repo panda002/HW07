@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/scenery"
+    tools:context=".ViewTripsFragment">
+
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="106dp"
+        android:layout_height="38dp"
+        android:fontFamily="cursive"
+        android:text="Owner"
+        android:textSize="24sp"
+        android:background="@drawable/rounded2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.744" />
+
+    <TextView
+        android:id="@+id/viewtrip_title"
+        android:layout_width="302dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/rounded"
+        android:hint="Trip Name"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.146"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.406" />
+
+    <TextView
+        android:id="@+id/viewtrip_latitude"
+        android:layout_width="302dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/rounded"
+        android:hint="Latitude"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.146"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.538" />
+
+    <ImageView
+        android:id="@+id/viewtrip_photo"
+        android:layout_width="294dp"
+        android:layout_height="184dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029"
+        tools:src="@tools:sample/backgrounds/scenic[17]" />
+
+    <TextView
+        android:id="@+id/viewtrip_longitude"
+        android:background="@drawable/rounded"
+        android:layout_width="302dp"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:hint="Longitude"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.661" />
+
+    <TextView
+        android:id="@+id/viewtrip_owner"
+        android:layout_width="247dp"
+        android:layout_height="36dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:background="@drawable/rounded"
+        android:hint="Longitude"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.853"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.743" />
+
+    <TextView
+        android:id="@+id/TripTitle"
+        android:layout_width="106dp"
+        android:layout_height="38dp"
+        android:fontFamily="cursive"
+        android:text="Trip Title"
+        android:background="@drawable/rounded2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.326" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="106dp"
+        android:layout_height="38dp"
+        android:background="@drawable/rounded2"
+        android:fontFamily="cursive"
+        android:text="Longitude"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.595" />
+
+    <TextView
+        android:id="@+id/Latitude"
+        android:layout_width="106dp"
+        android:background="@drawable/rounded2"
+        android:layout_height="38dp"
+        android:fontFamily="cursive"
+        android:text="Latitude"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.472" />
+
+    <Button
+        android:id="@+id/btn_jointrip"
+        android:layout_width="152dp"
+        android:layout_height="56dp"
+        android:text="Join Trip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@android:drawable/checkbox_off_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.896" />
+
+    <Button
+        android:id="@+id/btn_leavetrip"
+        android:layout_width="152dp"
+        android:layout_height="56dp"
+        android:text="Leave Trip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        android:background="@android:drawable/checkbox_off_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.896" />
+
+    <Button
+        android:id="@+id/btn_chatroom"
+        android:layout_width="152dp"
+        android:layout_height="56dp"
+        android:text="Chatroom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.938"
+        android:background="@android:drawable/checkbox_off_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.896" />
+</androidx.constraintlayout.widget.ConstraintLayout>

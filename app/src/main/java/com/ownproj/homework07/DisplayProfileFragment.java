@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,11 +43,12 @@ public class DisplayProfileFragment extends Fragment {
     private Button btn_createTrip;
     private Button btn_findTrip;
     private Button btn_findFriends;
-    private Button btn_editProfile;
+    private Button btn_editProfile, bt_logout;
     private FirebaseAuth mAuth;
     private String email;
     FirebaseStorage storage;
     private StorageReference storageReference;
+    final Trips trip = new Trips();
 
     public DisplayProfileFragment() {
         // Required empty public constructor
@@ -83,17 +85,22 @@ public class DisplayProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d("TAG", "onViewCreated in DisplayProfile Fragment: ");
+
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
+
         fullname = getActivity().findViewById(R.id.tv_fragDisplayName);
         gender = getActivity().findViewById(R.id.tv_fragDisplayGender);
         profilepic = getActivity().findViewById(R.id.imageFragDisplayProfile);
         btn_createTrip = getActivity().findViewById(R.id.btn_createtripDPF);
         btn_editProfile = getActivity().findViewById(R.id.btn_editprofileDPF);
         btn_findTrip = getActivity().findViewById(R.id.btn_findtripDPF);
+        bt_logout = getActivity().findViewById(R.id.btn_logoutp);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -111,8 +118,8 @@ public class DisplayProfileFragment extends Fragment {
                     profile.setFname(document.getData().get("fname").toString());
                     profile.setLname(document.getData().get("lname").toString());
                     profile.setGender(document.getData().get("gender").toString());
-                    if(document.getData().get("profilepic") != null){
-                        profile.setProfileimage(document.getData().get("profilepic").toString());
+                    if(document.getData().get("profileimage") != null){
+                        profile.setProfileimage(document.getData().get("profileimage").toString());
                     }
                     fullname.setText(profile.getFname()+" "+profile.getLname());
                     gender.setText(profile.getGender());
@@ -121,15 +128,32 @@ public class DisplayProfileFragment extends Fragment {
                     Log.d(TAG, "No such document");
                 }
             } else {
+                Toast.makeText(getActivity(), "No Trips Found. Create One?", Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "get failed with ", task.getException());
             }
         });
         btn_createTrip.setOnClickListener(view -> mListener.gotoCreatetrip());
 
         btn_editProfile.setOnClickListener(view -> mListener.gotoProfileBuilder());
+        btn_findTrip.setOnClickListener(view -> getFragmentManager().beginTransaction()
+                .replace(R.id.container, new HomePageFragment(email), "tag_FindTripFragment")
+                .addToBackStack(null)
+                .commit());
+
+        bt_logout.setOnClickListener(v -> {
+            mAuth.signOut();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new DisplayHomeFragment(), "LoginActivity")
+                    .addToBackStack(null)
+                    .commit();
+        });
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("Profile of - "+email);
+    }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -137,5 +161,8 @@ public class DisplayProfileFragment extends Fragment {
         void gotoCreatetrip();
 
         void gotoProfileBuilder();
+
+        void gotoTripBuilder(Trips trip);
+
     }
 }

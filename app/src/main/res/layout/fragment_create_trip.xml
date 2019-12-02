@@ -4,33 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateTrip">
+    android:background="@drawable/scenery"
+    tools:context=".CreateTripFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <EditText
         android:id="@+id/Trip_longitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="215dp"
+        android:layout_height="41dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="183dp"
-        android:layout_marginBottom="203dp"
+        android:layout_marginEnd="181dp"
+        android:background="@drawable/rounded"
         android:ems="10"
         android:hint="Enter Longitude"
         android:inputType="numberSigned|numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/Trip_btn_createchat"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Trip_latitude" />
+        app:layout_constraintTop_toBottomOf="@+id/Trip_latitude"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/Trip_btn_Savetrip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_width="106dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="80dp"
+        android:background="@android:drawable/checkbox_off_background"
         android:text="SAVE TRIP"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,54 +49,44 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
+        app:layout_constraintVertical_bias="0.00999999"
         app:srcCompat="@color/colorPrimary"
         tools:srcCompat="@android:drawable/alert_dark_frame" />
 
     <EditText
         android:id="@+id/Trip_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_width="215dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="181dp"
+        android:background="@drawable/rounded"
         android:ems="10"
         android:hint="Enter Trip Title"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Trip_iv_tripphoto"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/Trip_btn_createchat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:text="CREATE CHATROOM"
-        app:layout_constraintBottom_toTopOf="@+id/Trip_btn_Savetrip"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.301" />
 
     <EditText
         android:id="@+id/Trip_latitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="215dp"
+        android:layout_height="41dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="183dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="181dp"
+        android:background="@drawable/rounded"
         android:ems="10"
         android:hint="Enter Latitude"
         android:inputType="numberSigned|numberDecimal"
-        app:layout_constraintBottom_toTopOf="@+id/Trip_longitude"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Trip_title" />
+        app:layout_constraintTop_toBottomOf="@+id/Trip_title"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -110,18 +103,20 @@
 
     <EditText
         android:id="@+id/friend_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="178dp"
-        android:layout_marginBottom="88dp"
+        android:layout_width="234dp"
+        android:layout_height="85dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/rounded"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:scrollbarStyle="insideInset"
-        app:layout_constraintBottom_toTopOf="@+id/Trip_btn_createchat"
+        app:layout_constraintBottom_toTopOf="@+id/progressBart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Trip_longitude" />
 
@@ -140,4 +135,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/Trip_iv_tripphoto"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBart"
+        style="?android:attr/indeterminateProgressStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/Trip_btn_Savetrip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/friend_list"
+        app:layout_constraintVertical_bias="0.527" />
 </androidx.constraintlayout.widget.ConstraintLayout>

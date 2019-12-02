@@ -53,7 +53,6 @@ public class DisplayHomeFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         listner = (LoginFragmentInterface) context;
-
     }
 
     @Override
@@ -88,19 +87,31 @@ public class DisplayHomeFragment extends Fragment {
 
         mGoogleSignInClient = GoogleSignIn.getClient(getContext(), googleSignInOptions);
 
-        btn_login.setOnClickListener(view -> mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("TAG", "signInWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(getContext(), user.getEmail()+ " logged in Successfully", Toast.LENGTH_SHORT).show();
-                        listner.gotoProfileBuilder();
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.d("TAG", "signInWithEmail:failure", task.getException());
-                    }
-                }));
+        btn_login.setOnClickListener(view -> {
+            if(email.getText().toString().equals("") && (password.getText().toString().equals("")))
+            {
+                Toast.makeText(getActivity(), "Please enter a email id", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                progressBar.setVisibility(View.VISIBLE);
+                mAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                progressBar.setVisibility(View.GONE);
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("TAG", "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                Toast.makeText(getContext(), user.getEmail()+ " logged in Successfully", Toast.LENGTH_SHORT).show();
+                                listner.gotoDisplayFragment();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.d("TAG", "signInWithEmail:failure", task.getException());
+                            }
+                        });
+            }
+        });
+
 
         btn_signup.setOnClickListener(view -> listner.goToCreateAccount());
     }
@@ -116,5 +127,6 @@ public class DisplayHomeFragment extends Fragment {
     public interface LoginFragmentInterface {
         void goToCreateAccount();
         void gotoProfileBuilder();
+        void gotoDisplayFragment();
     }
 }
