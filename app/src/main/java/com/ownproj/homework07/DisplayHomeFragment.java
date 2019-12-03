@@ -116,6 +116,12 @@ public class DisplayHomeFragment extends Fragment {
         btn_signup.setOnClickListener(view -> listner.goToCreateAccount());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("Login or SignUp");
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -104,7 +104,7 @@ public class MainActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container, displayProfileFragment, "tag_DislpayProfile")
-                .addToBackStack("tag_ProfileBuilder")
+                .addToBackStack(null)
                 .commit();
     }
 
