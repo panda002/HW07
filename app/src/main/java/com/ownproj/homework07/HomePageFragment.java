@@ -86,13 +86,13 @@ public class HomePageFragment extends Fragment implements TripsRecyclerView.GetT
         bt_logout.setOnClickListener(v -> {
             mAuth.signOut();
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, new DisplayHomeFragment(), "LoginActivity")
+                    .replace(R.id.container, new DisplayHomeFragment(), "tag_LoginActivity")
                     .addToBackStack(null)
                     .commit();
         });
 
         iv_createTrip.setOnClickListener(v -> getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new CreateTripFragment(), "TAG_CreateTripFragment")
+                .replace(R.id.container, new CreateTripFragment(), "tag_CreateTripFragment")
                 .addToBackStack(null)
                 .commit());
 
@@ -120,7 +120,7 @@ public class HomePageFragment extends Fragment implements TripsRecyclerView.GetT
     @Override
     public void getTripDetails(Trips trip) {
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new ViewTripsFragment(trip), "CreateTripFragment")
+                .replace(R.id.container, new ViewTripsFragment(trip), "tag_CreateTripFragment")
                 .addToBackStack(null)
                 .commit();
     }
@@ -128,7 +128,7 @@ public class HomePageFragment extends Fragment implements TripsRecyclerView.GetT
     @Override
     public void goToTripChatRoom(Trips trip) {
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new ChatRoomFragment(trip.getTripId(), trip), "ChatRoomFragment")
+                .replace(R.id.container, new ChatRoomFragment(trip.getTripId(), trip), "tag_ChatRoomFragment")
                 .addToBackStack(null)
                 .commit();
     }
